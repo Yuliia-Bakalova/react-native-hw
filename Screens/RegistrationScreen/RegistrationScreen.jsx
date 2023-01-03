@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import {
   Text,
   View,
-  ImageBackground,
+  Image,
   TextInput,
   TouchableOpacity,
   Platform,
@@ -16,6 +16,7 @@ import {styles} from "../RegistrationScreen/RegistrationScreen.styled"
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native'
 SplashScreen.preventAutoHideAsync();
 
 const initialFormData = {
@@ -50,11 +51,14 @@ export default function RegistrationScreen() {
     return null;
   }
 
+   const navigation = useNavigation();
 
 const handleSubmit = () => {
-    setKeyboardShown(false);
-    Keyboard.dismiss();
+    // setKeyboardShown(false);
+    // Keyboard.dismiss();
     console.log(formData);
+
+  navigation.navigate("Home");
     setFormData(initialFormData);
   };
 
@@ -93,10 +97,10 @@ const handleSubmit = () => {
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container} onLayout={onLayoutRootView}>
-        <ImageBackground
+        <Image
           style={styles.image}
           source={require("../../assets/image/bgImage.png")}
-        >
+        />
           <KeyboardAvoidingView  behavior={Platform.OS == "ios" ? "padding" : "height"}>
             <View style={styles.wrap}>
 
@@ -177,7 +181,9 @@ const handleSubmit = () => {
                   >
                     <Text style={styles.buttonTitle}>Зарегистрироваться</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate("Login")}>
  <Text style={styles.text}>Уже есть аккаунт? Войти</Text>
 
                 </TouchableOpacity>
@@ -185,7 +191,7 @@ const handleSubmit = () => {
               </View>
             </View>
           </KeyboardAvoidingView>
-        </ImageBackground>
+        
  
       <StatusBar style="auto" />
     </View >
