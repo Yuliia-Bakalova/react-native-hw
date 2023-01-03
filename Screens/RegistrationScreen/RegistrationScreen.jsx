@@ -1,28 +1,32 @@
-import { useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useState, useCallback, } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet,
   Text,
   View,
   ImageBackground,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
   Platform,
+  KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
-} from "react-native";
+
+} from 'react-native';
+import {styles} from "../RegistrationScreen/RegistrationScreen.styled"
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import { AntDesign } from "@expo/vector-icons";
-import { styles } from "./RegistrationScreen.styled";
+SplashScreen.preventAutoHideAsync();
 
 const initialFormData = {
-  name: "",
-  email: "",
-  password: "",
-};
+  name: '',
+  email: '',
+  password: ''
+}
+
 
 export default function RegistrationScreen() {
-  const [formData, setFormData] = useState(initialFormData);
+   const [formData, setFormData] = useState(initialFormData);
   const [keyboardShown, setKeyboardShown] = useState(false);
   const [iconName, setIconName] = useState("pluscircleo");
   const [iconColor, setIconColor] = useState("#FF6C00");
@@ -30,13 +34,24 @@ export default function RegistrationScreen() {
   const [inputBorderColor, setInputBorderColor] = useState("#E8E8E8");
   const [isHidePassword, setIsHidePassword] = useState(true);
 
-   const keyboardHide = () => {
-    setKeyboardShown(false);
-    Keyboard.dismiss();
+  const [fontsLoaded] = useFonts({
+      "Roboto-Regular": require("../../assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Bold": require("../../assets/fonts/Roboto-Bold.ttf"),
+    "Roboto-Medium": require("../../assets/fonts/Roboto-Medium.ttf"),
+  });
 
-  };
-  
-  const handleSubmit = () => {
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+ if (!fontsLoaded) {
+    return null;
+  }
+
+
+const handleSubmit = () => {
     setKeyboardShown(false);
     Keyboard.dismiss();
     console.log(formData);
@@ -63,11 +78,21 @@ export default function RegistrationScreen() {
     setInputBgColor("#F6F6F6");
     setInputBorderColor("#E8E8E8");
   };
+  ///////////////////////////////////////////
+
+  const keyboardHide = () => {
+    Keyboard.dismiss();
+    
+  }
+
+
+
+
+
 
   return (
-       <TouchableWithoutFeedback onPress={keyboardHide}>
-    <View style={styles.container}>
-   
+    <TouchableWithoutFeedback onPress={keyboardHide}>
+      <View style={styles.container} onLayout={onLayoutRootView}>
         <ImageBackground
           style={styles.image}
           source={require("../../assets/image/bgImage.png")}
@@ -167,9 +192,6 @@ export default function RegistrationScreen() {
            </TouchableWithoutFeedback>
   );
 }
-
-
-
 
 
 

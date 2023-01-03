@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState,  useCallback, } from "react";
+import { StatusBar } from 'expo-status-bar';
 import {
   Text,
   View,
@@ -9,8 +10,11 @@ import {
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
-  StyleSheet,
+ StyleSheet
 } from "react-native";
+// import { styles } from "../LoginScreen/LoginScreen.styles";
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 const initialFormData = {
     email: "",
@@ -26,7 +30,21 @@ const [keyboardShown, setKeyboardShown] = useState(false);
   const [inputBgColor, setInputBgColor] = useState("#F6F6F6");
   const [inputBorderColor, setInputBorderColor] = useState("#E8E8E8");
   
-  
+  const [fontsLoaded] = useFonts({
+      "Roboto-Regular": require("../../assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Bold": require("../../assets/fonts/Roboto-Bold.ttf"),
+    "Roboto-Medium": require("../../assets/fonts/Roboto-Medium.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+ if (!fontsLoaded) {
+    return null;
+  }
 
  
    const keyboardHide = () => {
@@ -63,7 +81,7 @@ const [keyboardShown, setKeyboardShown] = useState(false);
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={onLayoutRootView}>
        <ImageBackground source={image} style={styles.image}>
           <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
