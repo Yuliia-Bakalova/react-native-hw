@@ -1,17 +1,22 @@
-import { Text, View, Image, StyleSheet } from "react-native";
-import { styles } from "./PostsScreen.styled";
+import { createStackNavigator } from "@react-navigation/stack";
+import DefaultPostsScreen from "../../Screens/DefaultPostsScreen/DefaultPostsScreen";
+import MapScreen from "../../Screens/MapScreen/MapScreen";
+import CommentsScreen from "../../Screens/CommentsScreen/CommentsScreen";
+const NestedScreen = createStackNavigator();
 
 const PostsScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.profileWrap}>
-        <Image source={require("../../assets/image/User.png")} />
-        <View style={styles.textWrap}>
-          <Text style={styles.name}>Natali Romanova </Text>
-          <Text style={styles.email}>email@example.com</Text>
-        </View>
-      </View>
-    </View>
+ <NestedScreen.Navigator>
+      <NestedScreen.Screen
+        name="DefaultPostsScreen"
+        component={DefaultPostsScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedScreen.Screen name="Comments" component={CommentsScreen} />
+      <NestedScreen.Screen name="Map" component={MapScreen} />
+    </NestedScreen.Navigator>
+
+   
   );
 };
 

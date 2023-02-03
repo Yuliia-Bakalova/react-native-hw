@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
-import PostsScreen from "../PostsScreen/PostsScreen";
-import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
-import ProfileScreen from "../ProfileScreen/ProfileScreen";
+import PostsScreen from "../../Screens/PostsScreen/PostsScreen";
+import CreatePostsScreen from "../../Screens/CreatePostsScreen/CreatePostsScreen";
+import ProfileScreen from "../../Screens/ProfileScreen/ProfileScreen";
+import DefaultPostsScreen from "../../Screens/DefaultPostsScreen/DefaultPostsScreen";
 import { TouchableOpacity } from "react-native-gesture-handler";
 const MainTab = createBottomTabNavigator();
 
@@ -10,8 +11,8 @@ const MainTab = createBottomTabNavigator();
 const Home = () => {
   return (
     <MainTab.Navigator
-      initialRouteName="Posts"
-      screenOptions={{
+      initialRouteName="Публикации"
+        screenOptions={{
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#FF6C00",
         tabBarInactiveTintColor: "#212121CC",
@@ -24,7 +25,7 @@ const Home = () => {
       }}
     >
       <MainTab.Screen
-        name="Posts"
+        name="Публикации"
         component={PostsScreen}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
@@ -55,7 +56,7 @@ const Home = () => {
         }}
       />
       <MainTab.Screen
-        name="Create Post"
+        name="Создать публикацию"
         component={CreatePostsScreen}
         options={{
           tabBarIcon: ({ size, focused }) => (
@@ -90,7 +91,7 @@ const Home = () => {
         }}
       />
       <MainTab.Screen
-        name="Profile"
+        name="Профиль"
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ size, color, focused }) => (

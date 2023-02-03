@@ -47,7 +47,9 @@ export const styles = StyleSheet.create({
     zIndex: 2,
     position: "absolute",
     top: 21,
-    left: 238,
+    left: 240,
+    backgroundColor: "#fff",
+    borderRadius: 20,
   },
   exitBtn: {
     zIndex: 2,
