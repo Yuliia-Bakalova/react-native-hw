@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
-import PostsScreen from "../../Screens/PostsScreen/PostsScreen";
-import CreatePostsScreen from "../../Screens/CreatePostsScreen/CreatePostsScreen";
-import ProfileScreen from "../../Screens/ProfileScreen/ProfileScreen";
-import DefaultPostsScreen from "../../Screens/DefaultPostsScreen/DefaultPostsScreen";
+import PostsScreen from "../PostsScreen/PostsScreen";
+import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
+import ProfileScreen from "../ProfileScreen/ProfileScreen";
+import DefaultPostsScreen from "../DefaultPostsScreen/DefaultPostsScreen";
 import { TouchableOpacity } from "react-native-gesture-handler";
 const MainTab = createBottomTabNavigator();
 

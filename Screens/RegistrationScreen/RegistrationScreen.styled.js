@@ -3,11 +3,13 @@ export const styles = StyleSheet.create({
    container: {
     flex: 1,
     backgroundColor: "#fff",
+    justifyContent: "flex-end",
   },
    image: {
     flex: 1,
-    justifyContent: "flex-end",
-    resizeMode: "cover",
+    position: "absolute",
+    width: "100%",
+    top: 0,
   },
   title: {
     fontFamily: "Roboto-Bold",
