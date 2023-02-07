@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     alignItems: "center",
     height: 600,
-    paddingHorizontal: 16,
   },
   avatar: {
     zIndex: 1,
@@ -56,5 +55,43 @@ export const styles = StyleSheet.create({
     position: "absolute",
     top: 25,
     right: 10,
+  },
+  postWrap: {
+    paddingHorizontal: 16,
+    marginBottom: 32,
+  },
+
+  postName: {
+    marginVertical: 8,
+    fontFamily: "Roboto-Bold",
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#212121",
+  },
+  postLabel: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  comments: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  commentsCount: {
+    color: "#BDBDBD",
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    lineHeight: 19,
+    marginLeft: 6,
+  },
+  place: {
+    flexDirection: "row",
+  },
+  placeText: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#212121",
+    marginLeft: 4,
+    textDecorationLine: "underline",
   },
 });

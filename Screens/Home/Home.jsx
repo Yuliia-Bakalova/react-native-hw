@@ -3,15 +3,17 @@ import { Feather } from "@expo/vector-icons";
 import PostsScreen from "../PostsScreen/PostsScreen";
 import CreatePostsScreen from "../CreatePostsScreen/CreatePostsScreen";
 import ProfileScreen from "../ProfileScreen/ProfileScreen";
-import DefaultPostsScreen from "../DefaultPostsScreen/DefaultPostsScreen";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
+// import { authSingOutUser  } from "../../redux/auth/authOperations";
 const MainTab = createBottomTabNavigator();
 
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  const dispatch = useDispatch();
   return (
     <MainTab.Navigator
-      initialRouteName="Публикации"
+     initialRouteName="MainPosts"
         screenOptions={{
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#FF6C00",
@@ -25,7 +27,7 @@ const Home = () => {
       }}
     >
       <MainTab.Screen
-        name="Публикации"
+        name="MainPosts"
         component={PostsScreen}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
@@ -43,16 +45,7 @@ const Home = () => {
             height: 40,
           },
           tabBarHideOnKeyboard: true,
-          headerRight: () => (
-            <TouchableOpacity activeOpacity={0.7} style={{ marginRight: 16 }}>
-              <Feather name="log-out" size={24} color="#BDBDBD" />
-            </TouchableOpacity>
-          ),
-          headerTitleAlign: "center",
-          headerStyle: {
-            borderBottomColor: "#E8E8E8",
-            borderBottomWidth: 1,
-          },
+          headerRight: false,
         }}
       />
       <MainTab.Screen
@@ -69,6 +62,9 @@ const Home = () => {
               />
             </TouchableOpacity>
           ),
+           tabBarStyle: {
+            display: "none",
+          },
           tabBarItemStyle: {
             backgroundColor: "#FF6C00",
             borderRadius: 20,
@@ -79,7 +75,11 @@ const Home = () => {
           tabBarHideOnKeyboard: true,
 
           headerLeft: () => (
-            <TouchableOpacity activeOpacity={0.7} style={{ marginLeft: 16 }}>
+           <TouchableOpacity
+              onPress={() => navigation.navigate("MainPosts")}
+              activeOpacity={0.7}
+              style={{ marginLeft: 16 }}
+            >
               <Feather name="arrow-left" size={24} color="#BDBDBD" />
             </TouchableOpacity>
           ),

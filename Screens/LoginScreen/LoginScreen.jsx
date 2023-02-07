@@ -10,6 +10,8 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { authSingInUser  } from "../../redux/auth/authOperations";
 import { styles } from "../LoginScreen/LoginScreen.styled";
 
 const initialFormData = {
@@ -25,10 +27,12 @@ const initialFormData = {
   const [inputBorderColor, setInputBorderColor] = useState("#E8E8E8");
   const [isHidePassword, setIsHidePassword] = useState(true);
 
+    const dispatch = useDispatch();
+    
   const handleSubmit = () => {
     console.log(formData);
     setFormData(initialFormData);
-    navigation.navigate("Home");
+   dispatch(authSingInUser(formData));
   };
 
   const keyboardHide = () => {

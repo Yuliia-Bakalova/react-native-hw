@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import {styles} from "../RegistrationScreen/RegistrationScreen.styled"
 import { AntDesign } from "@expo/vector-icons";
-
+import { useDispatch } from "react-redux";
+import { authSingUpUser  } from "../../redux/auth/authOperations";
 
 const initialFormData = {
   name: '',
@@ -30,10 +31,12 @@ const RegistrationScreen = ({ navigation }) => {
   const [iconName, setIconName] = useState("pluscircleo");
   const [iconColor, setIconColor] = useState("#FF6C00");
 
+  const dispatch = useDispatch();
+
   const handleSubmit = () => {
     console.log(formData);
     setFormData(initialFormData);
-     navigation.navigate("Home");
+    dispatch(authSingUpUser(formData));
   };
 
   const keyboardHide = () => {
